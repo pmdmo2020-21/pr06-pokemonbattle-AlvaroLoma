@@ -5,8 +5,96 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minHeight="100dp"
     tools:context=".ui.battle.BattleActivity">
 
-    <!-- TODO -->
+    <LinearLayout
+        android:id="@+id/pokemon1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fichaPokemon"
+        android:background="@color/green_50"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imagenPokemon1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/paddingPokemon"
+            app:srcCompat="@drawable/giratina" />
+
+        <TextView
+            android:id="@+id/nombrePokemon1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="@dimen/nombrePokemon" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pokemon2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fichaPokemon"
+        android:background="@color/purple_50"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon1">
+
+        <TextView
+            android:id="@+id/nombrePokemon2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="@dimen/nombrePokemon" />
+
+        <ImageView
+            android:id="@+id/imagenPokemon2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/paddingPokemon"
+            app:srcCompat="@drawable/cubone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/paddingPokemon"
+        android:text="@string/descripcion"
+        android:textSize="@dimen/discripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon2" />
+
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/tamañoPokemon"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toBottomOf="@+id/pokemon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pokemon1"
+        app:srcCompat="@drawable/versus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

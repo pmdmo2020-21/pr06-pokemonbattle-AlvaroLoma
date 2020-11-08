@@ -7,6 +7,137 @@
     android:layout_height="match_parent"
     tools:context=".ui.selection.SelectionActivity">
 
-    <!-- TODO -->
+    <ImageView
+        android:id="@+id/imagenPokemon1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        android:paddingStart="@dimen/paddingPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon1"
+        app:layout_constraintEnd_toStartOf="@+id/imagenPokemon2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bulbasur" />
+
+    <ImageView
+        android:id="@+id/imagenPokemon2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imagenPokemon1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cubone" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toTopOf="@+id/imagenPokemon3"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPokemon1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imagenPokemon1"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon1" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toTopOf="@+id/imagenPokemon4"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPokemon2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imagenPokemon2"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon2" />
+
+    <ImageView
+        android:id="@+id/imagenPokemon3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon3"
+        app:layout_constraintEnd_toStartOf="@+id/imagenPokemon4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonPokemon1"
+        app:srcCompat="@drawable/feebas" />
+
+    <ImageView
+        android:id="@+id/imagenPokemon4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imagenPokemon3"
+        app:layout_constraintTop_toBottomOf="@+id/botonPokemon2"
+        app:srcCompat="@drawable/giratina" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toTopOf="@+id/imagenPokemon5"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPokemon3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon3" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toTopOf="@+id/imagenPokemon6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imagenPokemon4"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon4" />
+
+    <ImageView
+        android:id="@+id/imagenPokemon5"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon5"
+        app:layout_constraintEnd_toStartOf="@+id/imagenPokemon6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonPokemon3"
+        app:srcCompat="@drawable/gyarados" />
+
+    <ImageView
+        android:id="@+id/imagenPokemon6"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/tamañoPokemon"
+        app:layout_constraintBottom_toTopOf="@+id/botonPokemon6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imagenPokemon5"
+        app:layout_constraintTop_toBottomOf="@+id/botonPokemon4"
+        app:srcCompat="@drawable/pikachu" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPokemon5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imagenPokemon5"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon5" />
+
+    <RadioButton
+        android:id="@+id/botonPokemon6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPokemon6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imagenPokemon6"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPokemon6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

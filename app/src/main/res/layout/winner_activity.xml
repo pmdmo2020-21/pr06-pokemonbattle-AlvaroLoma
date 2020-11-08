@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.winner.WinnerActivity">
 
-    <!-- TODO -->
+    <TextView
+        android:id="@+id/tituloGanador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tituloGanador"
+        android:textSize="@dimen/tituloGanador"
+        android:layout_marginTop="@dimen/marginTituloGanador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imagenGanador"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tamañoGanador"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/paddingPokemon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloGanador"
+        app:srcCompat="@drawable/bulbasur" />
+
+    <TextView
+        android:id="@+id/nombreGanador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/tituloGanador"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/paddingPokemon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenGanador" />
 </androidx.constraintlayout.widget.ConstraintLayout>

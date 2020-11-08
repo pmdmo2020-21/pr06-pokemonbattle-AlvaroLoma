@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="nombrePokemon">30dp</dimen>
+    <dimen name="paddingPokemon">20dp</dimen>
+    <dimen name="discripcion">20dp</dimen>
+    <dimen name="marginTituloGanador">50dp</dimen>
+    <dimen name="tituloGanador">40dp</dimen>
+    <dimen name="fichaPokemon">200dp</dimen>
+    <dimen name="tamañoPokemon">150dp</dimen>
+    <dimen name="tamañoGanador">400dp</dimen>
 </resources>
