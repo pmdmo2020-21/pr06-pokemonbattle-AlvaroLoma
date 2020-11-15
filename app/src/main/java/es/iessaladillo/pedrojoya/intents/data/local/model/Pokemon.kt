@@ -1,24 +1,9 @@
 package es.iessaladillo.pedrojoya.intents.data.local.model
 
+import android.os.Parcel
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-// TODO: Define las propiedades de un pokemon
-class Pokemon(fuerza:Int,nombre:String,imagen:Int,id:Long) {
-
-    private var fuerza: Int = fuerza
-    private var nombre: String = nombre
-    private var imagen: Int = imagen
-    private var id:Long=id
-    fun getImagen():Int{
-        return imagen
-    }
-    fun getFuerza():Int{
-        return fuerza
-    }
-    fun getNombre():String{
-        return nombre
-    }
-    fun getId():Long {
-        return id
-    }
-}
+@Parcelize
+data class Pokemon(val fuerza:Int, val nombre:String, val imagen:Int,val id:Long): Parcelable

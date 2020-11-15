@@ -3,13 +3,11 @@ package es.iessaladillo.pedrojoya.intents.ui.battle
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import es.iessaladillo.pedrojoya.intents.R
+import androidx.lifecycle.Observer
 import es.iessaladillo.pedrojoya.intents.data.local.Database
 import es.iessaladillo.pedrojoya.intents.data.local.model.Pokemon
 import es.iessaladillo.pedrojoya.intents.databinding.BattleActivityBinding
@@ -24,7 +22,7 @@ class BattleActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val resultIntent = result.data
             if (result.resultCode == Activity.RESULT_OK && resultIntent != null) {
-                cargarPokemon1(resultIntent)
+                viewModel.actualizarPokemon1(resultIntent.getParcelableExtra<Pokemon>("POKEMON")!!)
             }
 
         }
@@ -32,84 +30,75 @@ class BattleActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val resultIntent = result.data
             if (result.resultCode == Activity.RESULT_OK && resultIntent != null) {
-                cargarPokemon2(resultIntent)
+                viewModel.actualizarPokemon2(resultIntent.getParcelableExtra<Pokemon>("POKEMON")!!)
             }
 
         }
-
+    private val viewModel: BattleActivityViewModel by viewModels()
     private lateinit var binding: BattleActivityBinding
-    private lateinit var primerPokemon: Pokemon
-    private lateinit var segundoPokemon: Pokemon
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.battle_activity)
         binding = BattleActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupViews()
+        observables()
+    }
+
+    private fun observables() {
+        viewModel.primerPokemon.observe(this, { nuevoPokemon1(it) })
+        viewModel.segundoPokemon.observe(this, { nuevoPokemon2(it) })
+
     }
 
     private fun setupViews() {
-        primerPokemon = Database.getRandomPokemon()
-        segundoPokemon = Database.getRandomPokemon()
-        binding.imagenPokemon1.setImageResource(primerPokemon.getImagen())
-        binding.nombrePokemon1.text = primerPokemon.getNombre()
-        binding.imagenPokemon2.setImageResource(segundoPokemon.getImagen())
-        binding.nombrePokemon2.text = segundoPokemon.getNombre()
-        binding.boton.setOnClickListener(View.OnClickListener { batalla() })
-        binding.pokemon1.setOnClickListener { cambiarPokemon1(primerPokemon.getId()) }
-        binding.pokemon2.setOnClickListener { cambiarPokemon2(segundoPokemon.getId()) }
+        binding.boton.setOnClickListener(View.OnClickListener {
+            batalla(
+                viewModel.batalla(
+                    viewModel.primerPokemon.value!!,
+                    viewModel.segundoPokemon.value!!
+                )
+            )
+        })
+        binding.pokemon1.setOnClickListener { cambiarPokemon1() }
+        binding.pokemon2.setOnClickListener { cambiarPokemon2() }
+
     }
 
-    private fun cambiarPokemon1(id: Long) {
+    private fun nuevoPokemon2(pokemon: Pokemon) {
+        binding.nombrePokemon2.text = pokemon.nombre
+        binding.imagenPokemon2.setImageResource(pokemon.imagen)
+    }
+
+    private fun nuevoPokemon1(pokemon: Pokemon) {
+        binding.nombrePokemon1.text = pokemon.nombre
+        binding.imagenPokemon1.setImageResource(pokemon.imagen)
+    }
+
+    private fun cambiarPokemon1() {
         //startActivity(SelectionActivity.newIntent(this,id))
-        dateSelectionCall1.launch(SelectionActivity.newIntent(this, id))
-
-    }
-
-    private fun cambiarPokemon2(id: Long) {
-        //startActivity(SelectionActivity.newIntent(this,id))
-        dateSelectionCall2.launch(SelectionActivity.newIntent(this, id))
-
-    }
-
-    private fun batalla() {
-        var pokemonGanador: Pokemon
-        if (primerPokemon.getFuerza() > segundoPokemon.getFuerza()) {
-            pokemonGanador = primerPokemon
-        } else {
-            pokemonGanador = segundoPokemon
-        }
-        startActivity(
-            WinnerActivity.newIntent(
+        dateSelectionCall1.launch(
+            SelectionActivity.newIntent(
                 this,
-                pokemonGanador.getNombre(),
-                pokemonGanador.getImagen()
+                viewModel.primerPokemon.value!!
+            )
+        )
+
+    }
+
+    private fun cambiarPokemon2() {
+        //startActivity(SelectionActivity.newIntent(this,id))
+        dateSelectionCall2.launch(
+            SelectionActivity.newIntent(
+                this,
+                viewModel.segundoPokemon.value!!
             )
         )
     }
 
-    private fun cargarPokemon1(resultIntent: Intent) {
-        var id = resultIntent.getLongExtra("ID", 0)
-        var pokemon = Database.getPokemonById(id)
-        if (pokemon != null) {
-            binding.nombrePokemon1.text = pokemon.getNombre()
-            binding.imagenPokemon1.setImageResource(pokemon.getImagen())
-            primerPokemon = pokemon
-        }
-
-
+    private fun batalla(pokemon: Pokemon) {
+        startActivity(WinnerActivity.newIntent(this, pokemon))
     }
 
-    private fun cargarPokemon2(resultIntent: Intent) {
-        var id = resultIntent.getLongExtra("ID", 0)
-        var pokemon = Database.getPokemonById(id)
-        if (pokemon != null) {
-            binding.nombrePokemon2.text = pokemon.getNombre()
-            binding.imagenPokemon2.setImageResource(pokemon.getImagen())
-            segundoPokemon = pokemon
-        }
-
-
-    }
 
 }

@@ -8,19 +8,20 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.intents.data.local.Database
+import es.iessaladillo.pedrojoya.intents.data.local.model.Pokemon
 import es.iessaladillo.pedrojoya.intents.databinding.SelectionActivityBinding
 import es.iessaladillo.pedrojoya.intents.ui.battle.BattleActivity
 import es.iessaladillo.pedrojoya.intents.ui.winner.WinnerActivity
 
 class SelectionActivity : AppCompatActivity() {
-    private var idPokemon: Long = 0
+    private lateinit var pokemon: Pokemon
     private lateinit var binding: SelectionActivityBinding
 
     companion object {
-        const val ID = "ID"
-        fun newIntent(context: Context, id: Long): Intent {
+        const val POKEMON = "POKEMON"
+        fun newIntent(context: Context, pokemon: Pokemon): Intent {
             return Intent(context, SelectionActivity::class.java)
-                .putExtra(ID, id)
+                .putExtra(POKEMON, pokemon)
         }
     }
 
@@ -38,7 +39,6 @@ class SelectionActivity : AppCompatActivity() {
         cargarNombres()
         cargarBotones()
         cargarImagenes()
-
     }
 
     private fun cargarImagenes() {
@@ -62,20 +62,31 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarNombres() {
         var pokedex = Database.getAllPokemons()
         var iterador = pokedex.listIterator()
-        binding.botonPokemon1.text = iterador.next().getNombre()
-        binding.botonPokemon2.text = iterador.next().getNombre()
-        binding.botonPokemon3.text = iterador.next().getNombre()
-        binding.botonPokemon4.text = iterador.next().getNombre()
-        binding.botonPokemon5.text = iterador.next().getNombre()
-        binding.botonPokemon6.text = iterador.next().getNombre()
+        var pokemon=iterador.next()
+        binding.botonPokemon1.text = pokemon.nombre
+        binding.imagenPokemon1.setImageResource(pokemon.imagen)
+        pokemon=iterador.next()
+        binding.botonPokemon2.text = pokemon.nombre
+        binding.imagenPokemon2.setImageResource(pokemon.imagen)
+        pokemon=iterador.next()
+        binding.botonPokemon3.text = pokemon.nombre
+        binding.imagenPokemon3.setImageResource(pokemon.imagen)
+        pokemon=iterador.next()
+        binding.botonPokemon4.text = pokemon.nombre
+        binding.imagenPokemon4.setImageResource(pokemon.imagen)
+        pokemon=iterador.next()
+        binding.botonPokemon5.text = pokemon.nombre
+        binding.imagenPokemon5.setImageResource(pokemon.imagen)
+        pokemon=iterador.next()
+        binding.botonPokemon6.text = pokemon.nombre
+        binding.imagenPokemon6.setImageResource(pokemon.imagen)
     }
 
     private fun cargarPokemon1() {
-        var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon1.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in Database.getAllPokemons()) {
+            if (pokemon1.nombre == binding.botonPokemon1.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -86,9 +97,9 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarPokemon2() {
         var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon2.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in pokedex) {
+            if (pokemon1.nombre == binding.botonPokemon2.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -98,9 +109,9 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarPokemon3() {
         var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon3.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in pokedex) {
+            if (pokemon1.nombre == binding.botonPokemon3.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -110,9 +121,9 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarPokemon4() {
         var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon4.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in pokedex) {
+            if (pokemon1.nombre == binding.botonPokemon4.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -122,9 +133,9 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarPokemon5() {
         var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon5.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in pokedex) {
+            if (pokemon1.nombre == binding.botonPokemon5.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -134,9 +145,9 @@ class SelectionActivity : AppCompatActivity() {
     private fun cargarPokemon6() {
         var pokedex = Database.getAllPokemons()
 
-        for (pokemon in pokedex) {
-            if (pokemon.getNombre() == binding.botonPokemon6.text) {
-                idPokemon = pokemon.getId()
+        for (pokemon1 in pokedex) {
+            if (pokemon1.nombre == binding.botonPokemon6.text) {
+                pokemon =pokemon1
             }
         }
         apagarBotones()
@@ -144,25 +155,23 @@ class SelectionActivity : AppCompatActivity() {
     }
 
     private fun seleccionarPokemon() {
-        var pokemon = Database.getPokemonById(idPokemon)
-        if (pokemon != null) {
             apagarBotones()
-            if (binding.botonPokemon1.text == pokemon.getNombre()) {
+            if (binding.botonPokemon1.text == pokemon.nombre) {
                 binding.botonPokemon1.isChecked = true
-            } else if (binding.botonPokemon2.text == pokemon.getNombre()) {
+            } else if (binding.botonPokemon2.text == pokemon.nombre) {
                 binding.botonPokemon2.isChecked = true
-            } else if (binding.botonPokemon3.text == pokemon.getNombre()) {
+            } else if (binding.botonPokemon3.text == pokemon.nombre) {
                 binding.botonPokemon3.isChecked = true
-            } else if (binding.botonPokemon4.text == pokemon.getNombre()) {
+            } else if (binding.botonPokemon4.text == pokemon.nombre) {
                 binding.botonPokemon4.isChecked = true
-            } else if (binding.botonPokemon5.text == pokemon.getNombre()) {
+            } else if (binding.botonPokemon5.text == pokemon.nombre) {
                 binding.botonPokemon5.isChecked = true
-            } else if (binding.botonPokemon6.text == pokemon.getNombre()) {
+            } else if (binding.botonPokemon6.text == pokemon.nombre) {
                 binding.botonPokemon6.isChecked = true
             }
 
 
-        }
+
     }
 
     private fun apagarBotones() {
@@ -175,11 +184,11 @@ class SelectionActivity : AppCompatActivity() {
     }
 
     private fun reciveData() {
-        idPokemon = intent.getLongExtra(ID, 0)
+        pokemon = intent.getParcelableExtra<Pokemon>(POKEMON)!!
     }
 
     override fun onBackPressed() {
-        val result = Intent().putExtra(ID, idPokemon)
+        val result = Intent().putExtra(POKEMON,pokemon)
         setResult(Activity.RESULT_OK, result)
         finish()
         super.onBackPressed()

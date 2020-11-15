@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simulador de batallas pokemons</string>
+    <string name="star">Empieza el combate</string>
+    <string name="descripcion">Seleciona a tu oponente y pulsa el boton para saber quien es el ganador</string>
+    <string name="tituloGanador">Y el ganador es...</string>
+</resources>

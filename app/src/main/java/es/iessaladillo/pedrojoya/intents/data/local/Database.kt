@@ -25,7 +25,7 @@ object Database : DataSource{
     override fun getPokemonById(id: Long): Pokemon? {
         var pokemonElegido: Pokemon? =null
         for(pokemon in pokedex){
-            if(pokemon.getId()==id){
+            if(pokemon.id==id){
                 pokemonElegido= pokemon
             }
         }
